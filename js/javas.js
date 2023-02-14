@@ -67,48 +67,83 @@ function mostrar(mensaje){
 
 // El usuario elije el tipo de vehiculo que quiere asegurar.
 alert("Bienvenido al cotizador de seguros de Leandro Martinez")
-let vehiculoACotizar = parseInt(prompt("Digite el numero del vehiculo a cotizar (1. Auto, 2. Camioneta, 3. Moto)"));
+let vehiculoACotizar = parseInt(prompt("Digite el número del vehiculo a cotizar (1. Auto, 2. Camioneta, 3. Moto) o escriba 0 para cancelar."));
 
 console.log(vehiculoACotizar)
 
+while(vehiculoACotizar != 0 && vehiculoACotizar <= 3){
+
+
 if(vehiculoACotizar == 1)
 {
-    alert('Usted eligio el vehiculo 1. Auto')
+    alert('Usted eligió el vehículo 1. Auto')
     console.log(auto)
 }else if(vehiculoACotizar == 2)
 {
-    alert('Usted eligio el vechiulo 2. Camioneta')
+    alert('Usted eligió el vehículo 2. Camioneta')
     console.log(camioneta)
 }else if(vehiculoACotizar == 3)
 {
-    alert('Usted eligio el vehiculo 3. Moto')
+    alert('Usted eligió el vehículo 3. Moto')
     console.log(moto)
+}else if(vehiculoACotizar >= 4)
+{
+    console.error("No existe ese vehículo")
+    alert("Vehículo elegido incorrectamente, vuelva a intentarlo")
+    alert("Bienvenido al cotizador de seguros de Leandro Martinez")
+    vehiculoACotizar = parseInt(prompt("Digite el número del vehículo a cotizar (1. Auto, 2. Camioneta, 3. Moto) o escriba 0 para cancelar."));
 }
 // -------------------------------------------
 
 // El usuario elije el tipo de seguro
 alert("Elija el tipo de seguro que quiere utilizar")
-let tipoSeguro = parseInt(prompt('1. Seguro basico, 2. Seguro total contra todo'));
+let tipoSeguro = parseInt(prompt('1. Seguro básico, 2. Seguro total contra todo'));
 console.log(tipoSeguro)
 
-    if(tipoSeguro == 1){
-    alert('Ha elegido el seguro basico para su vehiculo')
-    console.log('Seguro basico')
-    }else{
-    alert('Ha elegido el seguro total contra todo para su vehiculo')
+    
+    if(tipoSeguro == 0)
+    {
+        console.error("No existe ese tipo de seguro")
+        alert("Tipo de seguro no encontrado, vuelva a seleccionar el seguro")
+        alert("Elija el tipo de seguro que quiere utilizar")
+        tipoSeguro = parseInt(prompt('1. Seguro básico, 2. Seguro total contra todo'));
+    }
+    else if(tipoSeguro >= 3){
+        console.error("No existe ese tipo de seguro")
+        alert("Tipo de seguro no encontrado, vuelva a seleccionar el seguro")
+        alert("Elija el tipo de seguro que quiere utilizar")
+        tipoSeguro = parseInt(prompt('1. Seguro básico, 2. Seguro total contra todo'));
+    }
+    else if(tipoSeguro == 1){
+        alert('Ha elegido el seguro básico para su vehículo')
+        console.log('Seguro básico')
+        }
+    else if(tipoSeguro == 2){
+    alert('Ha elegido el seguro total contra todo para su vehículo')
     console.log('Seguro total')
     }
+
 // -------------------------------------------
 
 // El usuario elije el metodo de pago.
 let tipoPago = parseInt(prompt('1. Contado (20% descuento), 2. Cuotas (15% recargo)'));
 console.log(tipoPago)
-if(tipoPago == 1)
+
+
+if(tipoPago == 0){
+    alert("El método de pago que eligió no existe, seleccione un nuevo método!")
+    console.error("No existe ese método de pago")
+}
+else if(tipoPago >= 3){
+    alert("El método de pago que eligió no existe, seleccione un nuevo método!")
+    console.error("No existe ese método de pago")
+}
+else if(tipoPago == 1)
 {
-alert('Usted eligio pagar al contado con 20% de descuento')
+alert('Usted eligió pagar al contado con 20% de descuento')
 console.log('Pago al contado')
 }else{
-    alert('Usted eligio pagar en cuotas con 15% de recargo')
+    alert('Usted eligió pagar en cuotas con 15% de recargo')
     console.log('Pago en cuotas')
 }
 
@@ -149,8 +184,7 @@ console.log('Pago al contado')
 
     mostrar('El costo final de su seguro es de $' + resultadoFinal)
 }
-}
-    if(vehiculoACotizar == 2){
+}else if(vehiculoACotizar == 2){
 
     if(tipoSeguro && tipoPago == 1){
 
@@ -182,8 +216,7 @@ seguroTotalCuotas(resultadoTotal, pagoCuotas)
 
 mostrar('El costo final de su seguro es de $' + resultadoFinal)
 }
-}
-    if(vehiculoACotizar == 3){
+}else if(vehiculoACotizar == 3){
 
         if(tipoSeguro && tipoPago == 1){
 
@@ -215,5 +248,12 @@ seguroTotalCuotas(resultadoTotal, pagoCuotas)
 
 mostrar('El costo final de su seguro es de $' + resultadoFinal)
 }
+
 }
+    
+    alert("Bienvenido al cotizador de seguros de Leandro Martinez")
+    vehiculoACotizar = parseInt(prompt("Digite el número del vehículo a cotizar (1. Auto, 2. Camioneta, 3. Moto) o escriba 0 para cancelar."));
+
+}
+
 // -------------------------------------------

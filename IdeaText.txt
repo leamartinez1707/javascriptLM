@@ -1,0 +1,18 @@
+Cotizador de seguros
+
+Preguntarle a la persona que quiere asegurar : Auto, Camioneta, Moto (Cada uno ya con un precio definido)
+
+Preguntarle si quiere un seguro basico o contra toda (Mostrarle cuanto cuesta cada uno)
+
+Preguntarle que metodo de pago va a elegir, contado(descuento 20%) o tarjeta de credito(cuotas sin recargo)
+
+Cotizarle son lo que haya elegido.
+
+crear objeto vehiculo
+cada vehiculo tiene su costo para calcular el seguro
+
+
+si vehiculo es x y se eligio x seguro
+calcular el costo segun metodo de pago elegido
+
+para vehiculoACotizar y tipoDeSeguro y tipoPago = costoTotal

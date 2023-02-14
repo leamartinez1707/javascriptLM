@@ -1,0 +1,10 @@
+body{
+    background-color: aquamarine;
+}
+
+.recargarPag{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    list-style: none;
+    font-size: 18px;
+    color: red;
+}

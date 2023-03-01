@@ -33,7 +33,7 @@
     }
     function seguroBasicoCuotas(resultadoBasico, pagoCuotas){
 
-    resultadoFinal = resultadoBasico * pagoCuotas
+    resultadoFinal = Math.ceil(resultadoBasico * pagoCuotas)
     }
     function seguroTotalContado(resultadoTotal, pagoContado){
 
@@ -41,7 +41,7 @@
     }
     function seguroTotalCuotas(resultadoTotal, pagoCuotas){
 
-    resultadoFinal = resultadoTotal * pagoCuotas
+    resultadoFinal = Math.ceil(resultadoTotal * pagoCuotas)
     }
 //-------------------------------------------
     //BUSCAR UN PRODUCTO POR NOMBRE INGRESADO

@@ -1,3 +1,6 @@
+// BLOC DE ANOTACIONES CON IDEAS
+
+
 Cotizador de seguros
 
 Preguntarle a la persona que quiere asegurar : Auto, Camioneta, Moto (Cada uno ya con un precio definido)
@@ -8,7 +11,7 @@ Preguntarle que metodo de pago va a elegir, contado(descuento 20%) o tarjeta de 
 
 Cotizarle son lo que haya elegido.
 
-crear objeto vehiculo
+Crear objeto vehiculo
 cada vehiculo tiene su costo para calcular el seguro
 
 

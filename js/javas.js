@@ -5,13 +5,27 @@
     //Eleccion de metodo de pago, contado(descuento 20%) o cuotas(recargo 15%)
     //Cotizarle segun lo seleccionado.
 
+    //Array de los vehiculos ingresados
+    let vehiculosArray = [
+        {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
+        {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
+        {marca: 'Volkswagen', modelo: 'Saveiro', precio: 50000, anio: 2011},
+        {marca: 'Volkswagen', modelo: 'Nivus', precio: 25000, anio: 2019},
+        {marca: 'Chevrolet', modelo: 'Aveo', precio: 55000, anio: 2022},
+        {marca: 'Chevrolet', modelo: 'Camaro', precio: 82000, anio: 2008},
+        {marca: 'Chevrolet', modelo: 'Cruze', precio: 53000, anio: 2023},
+        {marca: 'Chevrolet', modelo: 'Onix', precio: 44000, anio: 2013},
+        {marca: 'Suzuki', modelo: 'Alto', precio: 19000, anio: 2018},
+        {marca: 'Suzuki', modelo: 'Celerio', precio: 15000, anio: 2016}];
+//-------------------------------------------
+
     //Porcentaje de cada seguro segun su tipo, basico o contra todo. Y de los metodos de pago.
     let seguroBasico = 0.12;
     let seguroTotal = 0.15;
 
     let pagoContado = 0.80;
     let pagoCuotas = 1.15;
-//-------------------------------------------
+
     //Funciones para calcular el precio total del seguro segun el vehiculo elegido.
     let resultadoBasico = 0;
     function calcularSeguroBasico(precio, seguroBasico){
@@ -44,54 +58,71 @@
     resultadoFinal = Math.ceil(resultadoTotal * pagoCuotas)
     }
 //-------------------------------------------
-    //BUSCAR UN PRODUCTO POR NOMBRE INGRESADO
 
-    function buscarVehiculo(){
+    //Inicio aplicación
 
-    let ingresado = prompt('Ingrese el modelo del vehículo a cotizar para ver sus datos en consola o cancele para añadir nuevo vehículo')
-    let veIngresado = vehiculosArray.filter(vehiculo => vehiculo.modelo.includes(ingresado));
-    console.log(veIngresado)
-    } 
-    //ACÁ FALTARÍA QUE MUESTRE TODOS LOS DATOS EN CONSOLA Y ASÍ EL CLIENTE PUEDE VER LOS DATOS QUE TIENE QUE INGRESAR EN LOS PROXIMOS CAMPOS.
-    //SE LOGRÓ QUE APAREZCA EL O LOS OBJETOS EN CONSOLA PERO NO DEJA ABRIR PARA VER LOS DATOS ANTES DE SEGUIR.
-//-------------------------------------------
-    //Muestra el mensaje final
-    function mostrar(mensaje){
+    // alert('Bienvenidos a VeSeguro')
+    // buscarVehiculo() 
 
-    console.log(mensaje)
-    alert(mensaje)
-    }
-//-------------------------------------------
     //Objeto Vehiculo constructor
     class Vehiculo{
     
     constructor(marca, modelo, precio, anio){
-
+        
     this.marca = marca;
     this.modelo = modelo;
     this.precio = parseFloat(precio);
     this.anio = parseFloat(anio);
-    }
-    }
+}
+}
 //-------------------------------------------
-    //Array de los vehiculos ingresados y muestra en tabla HTML
-    let vehiculosArray = [
-    {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
-    {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
-    {marca: 'Volkswagen', modelo: 'Saveiro', precio: 50000, anio: 2011},
-    {marca: 'Volkswagen', modelo: 'Nivus', precio: 25000, anio: 2019},
-    {marca: 'Chevrolet', modelo: 'Aveo', precio: 55000, anio: 2022},
-    {marca: 'Chevrolet', modelo: 'Camaro', precio: 82000, anio: 2008},
-    {marca: 'Chevrolet', modelo: 'Cruze', precio: 53000, anio: 2023},
-    {marca: 'Chevrolet', modelo: 'Onix', precio: 44000, anio: 2013},
-    {marca: 'Suzuki', modelo: 'Alto', precio: 19000, anio: 2018},
-    {marca: 'Suzuki', modelo: 'Celerio', precio: 15000, anio: 2016}];
 
+    //Ingresar un vehiculo al Array
 
-//     function mostrarTabla(){
+    function agregarVehiculo(marca, modelo, precio, anio){
+
+    
+    marca = document.getElementById("select_marca").value;
+    modelo = document.getElementById("select_modelo").value;
+    precio = document.getElementById("select_precio").value;
+    anio = document.getElementById("select_anio").value;
+
+    vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
+
+    let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
+    localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+    console.log("Vehiculo agregado correctamente")
+    mostrarTabla()
+}
+//-------------------------------------------
+    
+    // Mostrar los datos del array en una tabla HTML
+    function mostrarTabla(){
+
+    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    vehiculosArray = JSON.parse( recuperando_vehiculos);
+    let tabla = document.getElementById("tablaVehiculos");
+
+    tabla.innerHTML = "";
+
+    for( let vehiculo of vehiculosArray){
+
+        let fila= document.createElement("tr");
+
+        fila.innerHTML = `<td>${vehiculo.marca}</td>
+                          <td>${vehiculo.modelo}</td>
+                          <td>${vehiculo.precio}</td>
+                          <td>${vehiculo.anio}</td>
+                          `
+        tabla.append(fila);
+
+    }
         
-//         let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
-//         recuperando_vehiculos = JSON.parse( recuperando_vehiculos);
+}
+//     function mostrarTabla(){
+
+//     let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+//     recuperando_vehiculos = JSON.parse( recuperando_vehiculos);
 //     const tablaVehiculos = document.querySelector('#tablaVehiculos')
 //     tablaVehiculos.innerHTML = "";
 
@@ -116,152 +147,96 @@
 
 // })
 // }
-
 //-------------------------------------------
-    //Inicio aplicación
 
-    // alert('Bienvenidos a VeSeguro')
-    // buscarVehiculo() 
-
-    //Ingresar un vehiculo al Array y/o cotizar segun datos agregados
-
-    function agregarVehiculo(marca, modelo, precio, anio){
-    // do{
-
-    // let check = prompt('Ingrese 1 para seguir con el procedimiento o 0 para cancelar')
-    // if(check === 0){
-
-    // break;    
-    // }else{
-    console.log("Vehiculo agregado correctamente")
-    marca = document.getElementById("select_marca").value;
-    modelo = document.getElementById("select_modelo").value;
-    precio = document.getElementById("select_precio").value;
-    anio = document.getElementById("select_anio").value;
-
-    vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
-
-    let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
-    localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
-
-    mostrarTabla()
-}
-
-function mostrarTabla(){
-
-    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
-    vehiculosArray = JSON.parse( recuperando_vehiculos);
-    let tabla = document.getElementById("tablaVehiculos");
-
-    tabla.innerHTML = "";
-
-    for( let vehiculo of vehiculosArray){
-
-        let fila= document.createElement("tr");
-
-        fila.innerHTML = `<td>${vehiculo.marca}</td>
-                          <td>${vehiculo.modelo}</td>
-                          <td>${vehiculo.precio}</td>
-                          <td>${vehiculo.anio}</td>
-                          `
-        tabla.append(fila);
-
-    }
-}
-    const vehiculosHead = document.querySelector('#vehiculos_head')
-    vehiculosHead.className = 'background-table'
-
-    // }}while(check != 0);
-
-    // for(let vehiculo of vehiculosArray){
-
-    // console.log(vehiculo.marca)
-    // console.log(vehiculo.modelo)
-    // console.log(vehiculo.precio)
-    // console.log(vehiculo.anio)
-    // }
-//-------------------------------------------
     //El usuario elije el tipo de seguro
-
-    // alert("Digíte el número del tipo de seguro a utilizar")
-    ////// let tipoSeguro = getElementByClassName("tipoPlan").value;
-    // console.log(tipoSeguro)
-    // //
-    // if(tipoSeguro == 0){
-
-    // alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
-    // console.error("No existe ese tipo de seguro")
-    // }else if(tipoSeguro >= 3){
-
-    // console.error("No existe ese tipo de seguro")
-    // alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
-    // }
-    // else if(tipoSeguro == 1){
-
-    // alert('Ha elegido el seguro básico para su vehículo')
-    // console.log('Seguro básico')
-    // }else if(tipoSeguro == 2){
-
-    // alert('Ha elegido el seguro total contra todo para su vehículo')
-    // console.log('Seguro total')
-    // }
+//     function tipoDeSeguro(){
+//     //Digíte el número del tipo de seguro a utilizar
+//     let tipoSeguro = document.getElementsByName("tipoPlan");
+//     for (let radio of tipoSeguro){
+//         if(radio.checked){
+//             tipoSeguro = radio.value
+//         }
+//     }
+// }
 
 //-------------------------------------------
     //El usuario elije el metodo de pago.
-    // alert("Digíte el número del tipo de pago a utilizar")
-    /////// let tipoPago = getElementByClassName("tipoPago").value;
-    // console.log(tipoPago)
-    // //
-    // if(tipoPago === 0 || tipoPago >= 3){
-    //     break;
-    // }else if(tipoPago >= 3){
+//     function tipoDePago(){
 
-    // alert("El método de pago que eligió no existe, seleccione un nuevo método!")
-    // console.error("No existe ese método de pago")
-    // }else if(tipoPago == 1){
-
-    // alert('Usted eligió pagar al contado con 20% de descuento')
-    // console.log('Pago al contado')
-    // }else{
-        
-    // alert('Usted eligió pagar en cuotas con 15% de recargo')
-    // console.log('Pago en cuotas')
-    // }
-
+//     //Digíte el número del tipo de pago a utilizar
+//     let tipoPago = document.getElementsByName("tipoPagos");
+//         for (let radioUno of tipoPago){
+//             if(radioUno.checked){
+//                 tipoPago = radioUno.value
+//         }
+//         }
+// }
 //-------------------------------------------
+
+    function buscarVehiculo(){
+
+    let modeloIngresado = document.getElementById("select_modelo").value;
+    // let anioIngresado = getElementById("select_anio");
+    let veIngresado = vehiculosArray.find(vehiculo => vehiculo.modelo.includes(modeloIngresado));
+    console.log(veIngresado.precio)
+    precio = veIngresado.precio;
+    } 
+    
+
+
     //Con este if, se cotiza el vehículo que se ingresó por último en las casillas de datos.
 
-    // if(tipoSeguro && tipoPago == 1){
+    function calcularCostoFinal(){
 
-    // calcularSeguroBasico(vehiculo.precio, seguroBasico)
-        
-    // seguroBasicoContado(resultadoBasico, pagoContado)
-        
-    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    // }else if(tipoSeguro == 1 && tipoPago == 2){
-        
-    // calcularSeguroBasico(vehiculo.precio, seguroBasico)
+    let tipoSeguro = document.getElementsByName("tipoPlan");
+    for (let radio of tipoSeguro){
+        if(radio.checked){
+            tipoSeguro = radio.value
+        }
+    }
+    let tipoPago = document.getElementsByName("tipoPagos");
+        for (let radioUno of tipoPago){
+            if(radioUno.checked){
+                tipoPago = radioUno.value
+        }
+    }
+    buscarVehiculo()
+    console.log(tipoSeguro)
+    console.log(tipoPago)
+
+    if(tipoSeguro && tipoPago == 1){
+
     
-    // seguroBasicoCuotas(resultadoBasico, pagoCuotas)
+    calcularSeguroBasico(precio, seguroBasico)
         
-    // // mostrar('El costo final de su seguro es de US$' +  resultadoFinal)
-    // }else if(tipoSeguro == 2 && tipoPago == 1){
+    seguroBasicoContado(resultadoBasico, pagoContado)
+        
+    console.log('El costo final de su seguro es de US$' + resultadoFinal)
+    }else if(tipoSeguro == 1 && tipoPago == 2){
+        
+    calcularSeguroBasico(precio, seguroBasico)
+    
+    seguroBasicoCuotas(resultadoBasico, pagoCuotas)
 
-    // calcularSeguroTotal(vehiculo.precio, seguroTotal)
-        
-    // seguroTotalContado(resultadoTotal, pagoContado)
-        
-    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    // }else if(tipoSeguro == 2 && tipoPago == 2){
-        
-    // calcularSeguroTotal(vehiculo.precio, seguroTotal)
-        
-    // seguroTotalCuotas(resultadoTotal, pagoCuotas)
-        
-    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    // }
+    console.log('El costo final de su seguro es de US$' +  resultadoFinal)
+    }else if(tipoSeguro == 2 && tipoPago == 1){
 
+    calcularSeguroTotal(precio, seguroTotal)
+        
+    seguroTotalContado(resultadoTotal, pagoContado)
 
+    console.log('El costo final de su seguro es de US$' + resultadoFinal)
+    }else if(tipoSeguro == 2 && tipoPago == 2){
+    
+    calcularSeguroTotal(precio, seguroTotal)
+
+    seguroTotalCuotas(resultadoTotal, pagoCuotas)
+
+    console.log('El costo final de su seguro es de US$' + resultadoFinal)
+    }
+}
+//-------------------------------------------
 
 
     let btn_agregar = document.getElementById("botonAgregar");
@@ -270,8 +245,11 @@ function mostrarTabla(){
     let actualizarTabla = document.getElementById("act_tabla");
     actualizarTabla.addEventListener("click" , mostrarTabla);
 
+    let cotizar = document.getElementById("botonCotizar");
+    cotizar.addEventListener("click", calcularCostoFinal);
 
 
+    // FALTA FILTRAR EL PRECIO POR MODELO Y AÑO <------------
 
 //-------------------------------------------
         

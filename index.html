@@ -75,16 +75,16 @@
     </div>
     <div class="campo mb-3">
         <label class="form-label">Plan</label>
-        <input class="radio tipoPlan" type="radio" name="plan" id="planBasico" value="1"/> Seguro básico
-        <input class="radio tipoPlan" type="radio" name="plan" id="planTotal" value="2"/> Seguro total
+        <input class="radio" type="radio" name="tipoPlan" id="planBasico" value="1"/> Seguro básico
+        <input class="radio" type="radio" name="tipoPlan" id="planTotal" value="2"/> Seguro total
     </div>
     <div class="campo mb-3">
         <label class="form-label">Pago</label>
-        <input class="radio tipoPago" type="radio" name="pago" id="pagoBasico" value="1"/> Pago contado
-        <input class="radio tipoPago" type="radio" name="pago" id="pagoTotal" value="2"/> Pago en cuotas
+        <input class="radio" type="radio" name="tipoPagos" id="pagoBasico" value="1"/> Pago contado
+        <input class="radio" type="radio" name="tipoPagos" id="pagoTotal" value="2"/> Pago en cuotas
     </div>
     <input id="botonAgregar"type="button" value="Agregar" class="btn btn-primary btn_agregar">
-    <input type="button" value="Cotizar" class="btn btn-primary">
+    <input id="botonCotizar"type="button" value="Cotizar" class="btn btn-primary btn_cotizar">
     <input type="button" value="Actualizar tabla" class="btn btn-primary" id="act_tabla">
 </fieldset>   
 </form>
@@ -94,7 +94,7 @@
 <br>
 
 <section>
-    <table class="table" id="tablaVehiculos">
+    <table class="table" id="">
       <thead id="vehiculos_head">
         <tr>
           <th scope="col">Marca</th>
@@ -103,7 +103,8 @@
           <th scope="col">Año</th>
         </tr>
       </thead>
-      <tbody id="tablaVehiculos"></tbody>
+      <tbody id="tablaVehiculos">
+      </tbody>
     </table>
   </section>
 </main>

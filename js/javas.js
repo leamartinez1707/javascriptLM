@@ -74,8 +74,8 @@
     }
     }
 //-------------------------------------------
-    //Array de los vehiculos ingresados
-    var vehiculosArray = [
+    //Array de los vehiculos ingresados y muestra en tabla HTML
+    let vehiculosArray = [
     {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
     {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
     {marca: 'Volkswagen', modelo: 'Saveiro', precio: 50000, anio: 2011},
@@ -86,119 +86,193 @@
     {marca: 'Chevrolet', modelo: 'Onix', precio: 44000, anio: 2013},
     {marca: 'Suzuki', modelo: 'Alto', precio: 19000, anio: 2018},
     {marca: 'Suzuki', modelo: 'Celerio', precio: 15000, anio: 2016}];
+
+
+//     function mostrarTabla(){
+        
+//         let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+//         recuperando_vehiculos = JSON.parse( recuperando_vehiculos);
+//     const tablaVehiculos = document.querySelector('#tablaVehiculos')
+//     tablaVehiculos.innerHTML = "";
+
+//     vehiculosArray.forEach(function(vehiculo) {
+//     let fila = document.createElement('tr')
+//     let celdaMarca = document.createElement('td')
+//     let celdaModelo = document.createElement('td')
+//     let celdaPrecio = document.createElement('td')
+//     let celdaAnio = document.createElement('td')
+
+//     celdaMarca.innerText = vehiculo.marca
+//     celdaModelo.innerText = vehiculo.modelo
+//     celdaPrecio.innerText = vehiculo.precio
+//     celdaAnio.innerText = vehiculo.anio
+
+//     fila.append(celdaMarca)
+//     fila.append(celdaModelo)
+//     fila.append(celdaPrecio)
+//     fila.append(celdaAnio)
+
+//     tablaVehiculos.append(fila)
+
+// })
+// }
+
 //-------------------------------------------
     //Inicio aplicación
 
-    alert('Bienvenidos a VeSeguro')
-    buscarVehiculo() 
+    // alert('Bienvenidos a VeSeguro')
+    // buscarVehiculo() 
 
     //Ingresar un vehiculo al Array y/o cotizar segun datos agregados
 
-    do{
+    function agregarVehiculo(marca, modelo, precio, anio){
+    // do{
 
-    var check = prompt('Ingrese la marca del vehiculo a cotizar o "Fin" para terminar el proceso')
-    if(check === 'Fin' || check === 'fin' || check === 'FIN'){
+    // let check = prompt('Ingrese 1 para seguir con el procedimiento o 0 para cancelar')
+    // if(check === 0){
 
-    break;    
-    }else{
+    // break;    
+    // }else{
+    console.log("Vehiculo agregado correctamente")
+    marca = document.getElementById("select_marca").value;
+    modelo = document.getElementById("select_modelo").value;
+    precio = document.getElementById("select_precio").value;
+    anio = document.getElementById("select_anio").value;
 
-    let marcaV = check;
-    let modeloV = prompt('Ingrese el modelo del vehículo')
-    let precioV = prompt('Ingrese el precio del vehículo en dólares')
-    let anioV = prompt('Ingrese el año del vehículo')
+    vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
 
-    vehiculosArray.push(new Vehiculo(marcaV, modeloV, precioV, anioV));
-    }}while(check != 'Fin' || check != 'fin' || check != 'FIN');
+    let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
+    localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
 
-    for(var vehiculo of vehiculosArray){
+    mostrarTabla()
+}
 
-    console.log(vehiculo.marca)
-    console.log(vehiculo.modelo)
-    console.log(vehiculo.precio)
-    console.log(vehiculo.anio)
+function mostrarTabla(){
+
+    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    vehiculosArray = JSON.parse( recuperando_vehiculos);
+    let tabla = document.getElementById("tablaVehiculos");
+
+    tabla.innerHTML = "";
+
+    for( let vehiculo of vehiculosArray){
+
+        let fila= document.createElement("tr");
+
+        fila.innerHTML = `<td>${vehiculo.marca}</td>
+                          <td>${vehiculo.modelo}</td>
+                          <td>${vehiculo.precio}</td>
+                          <td>${vehiculo.anio}</td>
+                          `
+        tabla.append(fila);
+
     }
+}
+    const vehiculosHead = document.querySelector('#vehiculos_head')
+    vehiculosHead.className = 'background-table'
+
+    // }}while(check != 0);
+
+    // for(let vehiculo of vehiculosArray){
+
+    // console.log(vehiculo.marca)
+    // console.log(vehiculo.modelo)
+    // console.log(vehiculo.precio)
+    // console.log(vehiculo.anio)
+    // }
 //-------------------------------------------
     //El usuario elije el tipo de seguro
 
-    alert("Digíte el número del tipo de seguro a utilizar")
-    let tipoSeguro = parseInt(prompt('0. Cancelar 1. Seguro básico, 2. Seguro total contra todo'));
-    console.log(tipoSeguro)
-    //
-    if(tipoSeguro == 0){
+    // alert("Digíte el número del tipo de seguro a utilizar")
+    ////// let tipoSeguro = getElementByClassName("tipoPlan").value;
+    // console.log(tipoSeguro)
+    // //
+    // if(tipoSeguro == 0){
 
-    alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
-    console.error("No existe ese tipo de seguro")
-    }else if(tipoSeguro >= 3){
+    // alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
+    // console.error("No existe ese tipo de seguro")
+    // }else if(tipoSeguro >= 3){
 
-    console.error("No existe ese tipo de seguro")
-    alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
-    }
-    else if(tipoSeguro == 1){
+    // console.error("No existe ese tipo de seguro")
+    // alert('Tipo de seguro incorrecto, ingrese los datos nuevamente!')
+    // }
+    // else if(tipoSeguro == 1){
 
-    alert('Ha elegido el seguro básico para su vehículo')
-    console.log('Seguro básico')
-    }else if(tipoSeguro == 2){
+    // alert('Ha elegido el seguro básico para su vehículo')
+    // console.log('Seguro básico')
+    // }else if(tipoSeguro == 2){
 
-    alert('Ha elegido el seguro total contra todo para su vehículo')
-    console.log('Seguro total')
-    }
+    // alert('Ha elegido el seguro total contra todo para su vehículo')
+    // console.log('Seguro total')
+    // }
 
 //-------------------------------------------
     //El usuario elije el metodo de pago.
-    alert("Digíte el número del tipo de pago a utilizar")
-    let tipoPago = parseInt(prompt('0. Cancelar 1. Contado (20% descuento), 2. Cuotas (15% recargo)'));
-    console.log(tipoPago)
-    //
-    if(tipoPago == 0){
+    // alert("Digíte el número del tipo de pago a utilizar")
+    /////// let tipoPago = getElementByClassName("tipoPago").value;
+    // console.log(tipoPago)
+    // //
+    // if(tipoPago === 0 || tipoPago >= 3){
+    //     break;
+    // }else if(tipoPago >= 3){
 
-    alert("El método de pago que eligió no existe, seleccione un nuevo método!")
-    console.error("No existe ese método de pago")
-    }else if(tipoPago >= 3){
+    // alert("El método de pago que eligió no existe, seleccione un nuevo método!")
+    // console.error("No existe ese método de pago")
+    // }else if(tipoPago == 1){
 
-    alert("El método de pago que eligió no existe, seleccione un nuevo método!")
-    console.error("No existe ese método de pago")
-    }else if(tipoPago == 1){
-
-    alert('Usted eligió pagar al contado con 20% de descuento')
-    console.log('Pago al contado')
-    }else{
+    // alert('Usted eligió pagar al contado con 20% de descuento')
+    // console.log('Pago al contado')
+    // }else{
         
-    alert('Usted eligió pagar en cuotas con 15% de recargo')
-    console.log('Pago en cuotas')
-    }
+    // alert('Usted eligió pagar en cuotas con 15% de recargo')
+    // console.log('Pago en cuotas')
+    // }
 
 //-------------------------------------------
     //Con este if, se cotiza el vehículo que se ingresó por último en las casillas de datos.
 
-    if(tipoSeguro && tipoPago == 1){
+    // if(tipoSeguro && tipoPago == 1){
 
-    calcularSeguroBasico(vehiculo.precio, seguroBasico)
+    // calcularSeguroBasico(vehiculo.precio, seguroBasico)
         
-    seguroBasicoContado(resultadoBasico, pagoContado)
+    // seguroBasicoContado(resultadoBasico, pagoContado)
         
-    mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    }else if(tipoSeguro == 1 && tipoPago == 2){
+    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
+    // }else if(tipoSeguro == 1 && tipoPago == 2){
         
-    calcularSeguroBasico(vehiculo.precio, seguroBasico)
+    // calcularSeguroBasico(vehiculo.precio, seguroBasico)
     
-    seguroBasicoCuotas(resultadoBasico, pagoCuotas)
+    // seguroBasicoCuotas(resultadoBasico, pagoCuotas)
         
-    mostrar('El costo final de su seguro es de US$' +  resultadoFinal)
-    }else if(tipoSeguro == 2 && tipoPago == 1){
+    // // mostrar('El costo final de su seguro es de US$' +  resultadoFinal)
+    // }else if(tipoSeguro == 2 && tipoPago == 1){
 
-    calcularSeguroTotal(vehiculo.precio, seguroTotal)
+    // calcularSeguroTotal(vehiculo.precio, seguroTotal)
         
-    seguroTotalContado(resultadoTotal, pagoContado)
+    // seguroTotalContado(resultadoTotal, pagoContado)
         
-    mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    }else if(tipoSeguro == 2 && tipoPago == 2){
+    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
+    // }else if(tipoSeguro == 2 && tipoPago == 2){
         
-    calcularSeguroTotal(vehiculo.precio, seguroTotal)
+    // calcularSeguroTotal(vehiculo.precio, seguroTotal)
         
-    seguroTotalCuotas(resultadoTotal, pagoCuotas)
+    // seguroTotalCuotas(resultadoTotal, pagoCuotas)
         
-    mostrar('El costo final de su seguro es de US$' + resultadoFinal)
-    }
+    // // mostrar('El costo final de su seguro es de US$' + resultadoFinal)
+    // }
+
+
+
+
+    let btn_agregar = document.getElementById("botonAgregar");
+    btn_agregar.addEventListener("click" , agregarVehiculo);
+
+    let actualizarTabla = document.getElementById("act_tabla");
+    actualizarTabla.addEventListener("click" , mostrarTabla);
+
+
+
+
 //-------------------------------------------
         
 

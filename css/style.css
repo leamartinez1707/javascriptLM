@@ -1,5 +1,5 @@
 body{
-    background-color: rgb(108, 225, 230);
+    background-color: rgb(255, 255, 255);
 }
 
 .recargarPag{
@@ -8,3 +8,16 @@ body{
     font-size: 18px;
     color: red;
 }
+
+table {
+    width: 100%;
+  }
+  th, td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .background-table{
+    background-color: rgb(149, 233, 248);
+  }

@@ -8,25 +8,104 @@
     <link rel="icon" type="image/png" sizes="32x32" href="./favico/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="./favico/favicon-16x16.png">
     <link rel="manifest" href="./favico/site.webmanifest">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script defer src="./js/javas.js"></script>
     <link rel="stylesheet" href="./css/style.css">
     <title>VeSeguro | Inicio</title>
 </head>
 <body>
-<header>
-    <h1>BIENVENIDOS A LA SEGUNDA ENTREGA</h1>
-</header>
-<main>
-    <h2>
-        Utilizar la consola para ver el trabajo realizado.
-    </h2>
 
-    <h4>En caso de no funcionar, recargue la pagina</h4>
-    <a class="recargarPag" href="./index.html">COTIZAR NUEVO VEHÍCULO</a>
+    <header>
+    <h1>VeSeguro | Cotizador de seguro</h1>
+    </header>
+
+    <main class="contenedor">
+
+    <div class="formulario">
+        <form bg-secondary m-2 p-2>
+        <fieldset>
+        <div class="campo mb-3">
+        <label class="form-label">Marca</label>
+
+        <select name="marca" id="select_marca">
+            <option value="">-- Seleccione --</option>
+            <option value="Chevrolet">Chevrolet</option>
+            <option value="Suzuki">Suzuki</option>
+            <option value="Volkswagen">Volkswagen</option>
+
+        </select>
+    </div>
+    <div class="campo mb-3">
+        <label class="form-label">Modelo</label>
+        <input class="form-text" value="" type="text" id="select_modelo" placeholder="Escriba el modelo">
+        <!-- <select name="marca" id="selectMarca">
+            <option value="">-- Seleccione --</option>
+            <option value="Aveo">Aveo</option>
+            <option value="Alto">Alto</option>
+            <option value="Camaro">Camaro</option>
+            <option value="Celerio">Celerio</option>
+            <option value="Cruze">Cruze</option>
+            <option value="Gol">Gol</option>
+            <option value="Nivus">Nivus</option>
+            <option value="Onix">Onix</option>
+            <option value="Saveiro">Saveiro</option>
+            <option value="Vento">Vento</option>
+        </select> -->
+    </div>
+    <div class="campo mb-3">
+        <label class="form-label">Precio</label>
+        <input class="form-text" value="" type="text" id="select_precio" placeholder="Solo en caso de agregar">
+    </div>
+    <div class="campo mb-3">
+        <label class="form-label">Año</label>
+        <select name="anio" id="select_anio">
+            <option value="">-- Seleccione --</option>
+            <option value="2013">2013</option>
+            <option value="2014">2014</option>
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+        </select>
+    </div>
+    <div class="campo mb-3">
+        <label class="form-label">Plan</label>
+        <input class="radio tipoPlan" type="radio" name="plan" id="planBasico" value="1"/> Seguro básico
+        <input class="radio tipoPlan" type="radio" name="plan" id="planTotal" value="2"/> Seguro total
+    </div>
+    <div class="campo mb-3">
+        <label class="form-label">Pago</label>
+        <input class="radio tipoPago" type="radio" name="pago" id="pagoBasico" value="1"/> Pago contado
+        <input class="radio tipoPago" type="radio" name="pago" id="pagoTotal" value="2"/> Pago en cuotas
+    </div>
+    <input id="botonAgregar"type="button" value="Agregar" class="btn btn-primary btn_agregar">
+    <input type="button" value="Cotizar" class="btn btn-primary">
+    <input type="button" value="Actualizar tabla" class="btn btn-primary" id="act_tabla">
+</fieldset>   
+</form>
+</div>
+
+
+<br>
+
+<section>
+    <table class="table" id="tablaVehiculos">
+      <thead id="vehiculos_head">
+        <tr>
+          <th scope="col">Marca</th>
+          <th scope="col">Modelo</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Año</th>
+        </tr>
+      </thead>
+      <tbody id="tablaVehiculos"></tbody>
+    </table>
+  </section>
 </main>
-    <script src="./js/javas.js"> 
-    
-    
-
-    </script>
 </body>
 </html>

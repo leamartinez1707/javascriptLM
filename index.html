@@ -22,10 +22,9 @@
     <main class="contenedor">
 
     <div class="formulario">
-        <form bg-secondary m-2 p-2>
-        <fieldset>
+        <form bg-secondary class="form_base">
         <div class="campo mb-3">
-        <label class="form-label">Marca</label>
+        <label class="form-label">Marca *</label>
 
         <select name="marca" id="select_marca">
             <option value="">-- Seleccione --</option>
@@ -36,7 +35,7 @@
         </select>
     </div>
     <div class="campo mb-3">
-        <label class="form-label">Modelo</label>
+        <label class="form-label">Modelo *</label>
         <input class="form-text" value="" type="text" id="select_modelo" placeholder="Escriba el modelo">
         <!-- <select name="marca" id="selectMarca">
             <option value="">-- Seleccione --</option>
@@ -53,11 +52,11 @@
         </select> -->
     </div>
     <div class="campo mb-3">
-        <label class="form-label">Precio</label>
+        <label class="form-label">Precio *</label>
         <input class="form-text" value="" type="text" id="select_precio" placeholder="Solo en caso de agregar">
     </div>
     <div class="campo mb-3">
-        <label class="form-label">Año</label>
+        <label class="form-label">Año *</label>
         <select name="anio" id="select_anio">
             <option value="">-- Seleccione --</option>
             <option value="2013">2013</option>
@@ -73,27 +72,46 @@
             <option value="2023">2023</option>
         </select>
     </div>
-    <div class="campo mb-3">
+    <div class="campo_radio mb-3">
         <label class="form-label">Plan</label>
         <input class="radio" type="radio" name="tipoPlan" id="planBasico" value="1"/> Seguro básico
         <input class="radio" type="radio" name="tipoPlan" id="planTotal" value="2"/> Seguro total
     </div>
-    <div class="campo mb-3">
+    <div class="campo_radio mb-3">
         <label class="form-label">Pago</label>
         <input class="radio" type="radio" name="tipoPagos" id="pagoBasico" value="1"/> Pago contado
         <input class="radio" type="radio" name="tipoPagos" id="pagoTotal" value="2"/> Pago en cuotas
     </div>
-    <input id="botonAgregar"type="button" value="Agregar" class="btn btn-primary btn_agregar">
-    <input id="botonCotizar"type="button" value="Cotizar" class="btn btn-primary btn_cotizar">
-    <input type="button" value="Actualizar tabla" class="btn btn-primary" id="act_tabla">
-</fieldset>   
+    <div class="botones">
+        <input id="botonAgregar" type="button" value="Agregar vehículo" class="btn btn-secondary btn_agregar">
+        <input id="botonCotizar"type="button" value="Cotizar vehículo" class="btn btn-secondary btn_cotizar">
+        <input id="act_tabla" type="button" value="Actualizar tabla" class="btn btn-secondary">
+        <input id="botonBuscar"type="button" value="Buscar vehículos" class="btn btn-secondary">
+</div>  
+<section class="texto-indicativo">
+    <div>
+        <p>
+            <h2>*Para agregar un vehículo, llene todo los datos que tengan *.</h2>
+        </p>
+    </div>
+    <div>
+        <p>
+            <h2>*Para cotizar un vehículo, ingrese el modelo, año y tipo de plan/pago.</h2>
+        </p>
+    </div>
+    <div>
+        <p>
+            <h2>*Para buscar todos los vehículos de un modelo determinado, escriba el modelo y presione "Buscar Vehículo".</h2>
+        </p>
+    </div>
+</section>
 </form>
 </div>
-
-
 <br>
-
 <section>
+    <div class="mb-4"><h2>
+        Tabla de vehículos ingresados o cotizados.
+    </h2></div>
     <table class="table" id="">
       <thead id="vehiculos_head">
         <tr>
@@ -104,6 +122,23 @@
         </tr>
       </thead>
       <tbody id="tablaVehiculos">
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="mb-4"><h2>
+        Tabla de vehículo cotizado.
+    </h2></div>
+    <table class="table" id="">
+      <thead id="tabla_cotizado">
+        <tr>
+          <th scope="col">Seguro</th>
+          <th scope="col">Pago</th>
+          <th scope="col">Precio anual</th>
+        </tr>
+      </thead>
+      <tbody id="cotizado_body">
       </tbody>
     </table>
   </section>

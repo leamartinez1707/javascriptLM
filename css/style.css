@@ -1,23 +1,118 @@
-body{
-    background-color: rgb(255, 255, 255);
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-.recargarPag{
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    list-style: none;
-    font-size: 18px;
-    color: red;
+body{
+    background-color: rgb(255, 255, 255);
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+header{
+  background-color: rgb(120, 198, 243);
+}
+header h1{
+  font-family: Impact,'Arial Narrow Bold', sans-serif;
+  margin: 0px;
+  padding: 2px;
+}
+#select_marca{
+  text-decoration: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-width: 4px;
+  border-color: black;
+  width: 50%;
+}
+#select_modelo{
+  text-decoration: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-width: 4px;
+  border-color: black;
+  width: 50%;
+}
+#select_precio{
+  text-decoration: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-width: 4px;
+  border-color: black;
+  width: 50%;
+}
+#select_anio{
+  text-decoration: none;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  border-width: 4px;
+  border-color: black;
+  width: 50%;
+}
+
+.formulario{
+  display: flex;
+  background-color: rgb(120, 198, 243);
+  text-align: center;
+  justify-content: center;
+}
+.form_base{
+  background-color: rgb(255, 255, 255);
+  width: 60%;
+  border-style: solid;
+  border-color: black;
+  border-width: 6px;
+}
+.form-label{
+  display: block;
+  font-size: 20px;
+  margin: 3px 3px;
+  padding: 2px 3px;
+}
+.form-text{
+  text-decoration: none;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.formulario h2{
+  font-size: 14px;
+}
+#botonAgregar:hover{
+  background-color: rgb(120, 198, 243);
+  color: black;
+  transform: scale(1.1);
+  transition: 1s;
+}
+#botonCotizar:hover{
+  background-color: rgb(120, 198, 243);
+  color: black;
+  transform: scale(1.1);
+  transition: 1s;
+}
+#botonBuscar:hover{
+  background-color: rgb(120, 198, 243);
+  color: black;
+  transform: scale(1.1);
+  transition: 1s;
+}
+#act_tabla:hover{
+  background-color: rgb(120, 198, 243);
+  color: black;
+  transform: scale(1.1);
+  transition: 1s;
+}
+.campo_radio{
+  font-size: 18px;
+}
+
+.botones{
+  padding: 6px;
 }
 
 table {
     width: 100%;
   }
-  th, td {
+th, td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
-  }
-  
-  .background-table{
+}
+.background-table{
     background-color: rgb(149, 233, 248);
   }

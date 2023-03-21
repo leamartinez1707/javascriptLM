@@ -173,15 +173,29 @@
 //         }
 // }
 //-------------------------------------------
-
+   
     function buscarVehiculo(){
-
+    
     let modeloIngresado = document.getElementById("select_modelo").value;
-    // let anioIngresado = getElementById("select_anio");
-    let veIngresado = vehiculosArray.find(vehiculo => vehiculo.modelo.includes(modeloIngresado));
+    let veFiltrado = vehiculosArray.filter(vehiculo => vehiculo.modelo.includes(modeloIngresado));
+    console.log(veFiltrado)
+}
+
+    function filtrarVehiculo(){
+    let anioIngresado = document.getElementById("select_anio").value;
+    let veIngresado = veFiltrado.find(vehiculo => vehiculo.anio.includes(anioIngresado));
     console.log(veIngresado.precio)
-    precio = veIngresado.precio;
-    } 
+}
+
+    // function buscarVehiculo(){
+
+    // let modeloIngresado = document.getElementById("select_modelo").value;
+    // let anioIngresado = document.getElementById("select_anio").value;
+    // let veIngresado = vehiculosArray.find(vehiculo => vehiculo.modelo.includes(modeloIngresado, anioIngresado));
+    // console.log(veIngresado.precio)
+    // precio = veIngresado.precio;
+    // anio = veIngresadoDos.anio;
+    // } 
     
 
 
@@ -201,6 +215,8 @@
                 tipoPago = radioUno.value
         }
     }
+
+    filtrarVehiculo()
     buscarVehiculo()
     console.log(tipoSeguro)
     console.log(tipoPago)

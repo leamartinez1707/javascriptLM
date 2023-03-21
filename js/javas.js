@@ -56,9 +56,11 @@
 
     function filtrarVehiculo(){
     
+    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    vehiculosArray = JSON.parse( recuperando_vehiculos);
+
     let modeloIngresado = document.getElementById("select_modelo").value;
     veFiltrado = vehiculosArray.filter(vehiculo => vehiculo.modelo.includes(modeloIngresado));
-    console.log(veFiltrado)
 }
 
     function buscarVehiculo(){
@@ -67,8 +69,6 @@
 
     let anioIngresado = document.getElementById("select_anio").value;
     veIngresado = veFiltrado.find(filtro => filtro.anio == anioIngresado);
-    marca = veIngresado.marca;
-    modelo = veIngresado.modelo;
     precio = veIngresado.precio;
     
     let tabla = document.getElementById("tablaVehiculos");
@@ -83,10 +83,83 @@
                           `
     tabla.append(fila);
 }
+//-------------------------------------------
+
+    //Buscar vehículos ingresados según modelo. (Sin funcionar aún)
+function buscarVehiculoModelo(){
+
+    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    vehiculosArray = JSON.parse(recuperando_vehiculos);
+    
+    let modeloIngresado = document.getElementById("select_modelo").value;
+    veFiltrado = vehiculosArray.filter(vh => vh.modelo.includes(modeloIngresado));
+    
+    let tabla = document.getElementById("tablaVehiculos");
+
+    tabla.innerHTML = "";
+
+    for( let vh of veFiltrado){
+
+        let fila= document.createElement("tr");
+
+        fila.innerHTML = `<td>${veFiltrado.marca}</td>
+                          <td>${veFiltrado.modelo}</td>
+                          <td>US$ ${veFiltrado.precio}</td>
+                          <td>${veFiltrado.anio}</td>
+                          `
+        tabla.append(fila);
+
+}
+}
+//-------------------------------------------
+
+    //Ingresar un vehiculo al Array
+
+    function agregarVehiculo(marca, modelo, precio, anio){
+
+        
+        
+        marca = document.getElementById("select_marca").value;
+        modelo = document.getElementById("select_modelo").value;
+        precio = document.getElementById("select_precio").value;
+        anio = document.getElementById("select_anio").value;
+        
+        vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
+    
+        let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
+        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+        mostrarTabla()
+}    
+//-------------------------------------------
+
+    //Mostrar los datos del array en una tabla HTML
+    function mostrarTabla(){
+
+    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    vehiculosArray = JSON.parse( recuperando_vehiculos);
+
+    let tabla = document.getElementById("tablaVehiculos");
+
+    tabla.innerHTML = "";
+
+    for( let vehiculo of vehiculosArray){
+
+        let fila= document.createElement("tr");
+
+        fila.innerHTML = `<td>${vehiculo.marca}</td>
+                          <td>${vehiculo.modelo}</td>
+                          <td>US$ ${vehiculo.precio}</td>
+                          <td>${vehiculo.anio}</td>
+                          `
+        tabla.append(fila);
+
+}
+}
+//-------------------------------------------
 
     //Inicio aplicación
-
     //Array de los vehiculos ingresados
+
     let vehiculosArray = [
         {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
         {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
@@ -113,51 +186,7 @@
 }
 //-------------------------------------------
 
-    //Ingresar un vehiculo al Array
-
-    function agregarVehiculo(marca, modelo, precio, anio){
-
-    
-    marca = document.getElementById("select_marca").value;
-    modelo = document.getElementById("select_modelo").value;
-    precio = document.getElementById("select_precio").value;
-    anio = document.getElementById("select_anio").value;
-
-    vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
-
-    let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
-    localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
-    console.log("Vehiculo agregado correctamente")
-    mostrarTabla()
-}
-//-------------------------------------------
-    
-    // Mostrar los datos del array en una tabla HTML
-    function mostrarTabla(){
-
-    let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
-    vehiculosArray = JSON.parse( recuperando_vehiculos);
-    let tabla = document.getElementById("tablaVehiculos");
-
-    tabla.innerHTML = "";
-
-    for( let vehiculo of vehiculosArray){
-
-        let fila= document.createElement("tr");
-
-        fila.innerHTML = `<td>${vehiculo.marca}</td>
-                          <td>${vehiculo.modelo}</td>
-                          <td>${vehiculo.precio}</td>
-                          <td>${vehiculo.anio}</td>
-                          `
-        tabla.append(fila);
-
-    }
-}
-
-//-------------------------------------------
-    
-    //Con este if, se cotiza el vehículo que se ingresó por último en las casillas de datos.
+    //Con esta funcion, se cotiza el vehículo que se ingresó por último en las casillas de datos.
 
     function calcularCostoFinal(){
 
@@ -176,8 +205,6 @@
 
     filtrarVehiculo()
     buscarVehiculo()
-    console.log(tipoSeguro)
-    console.log(tipoPago)
 
     if(tipoSeguro == 1 && tipoPago == 1){
 
@@ -261,6 +288,8 @@
     let cotizar = document.getElementById("botonCotizar");
     cotizar.addEventListener("click", calcularCostoFinal);
 
+    let buscarVh = document.getElementById("botonBuscar");
+    buscarVh.addEventListener("click", buscarVehiculoModelo);
 //-------------------------------------------
         
 

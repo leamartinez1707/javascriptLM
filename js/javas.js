@@ -93,7 +93,7 @@ function buscarVehiculoModelo(){
     
     let modeloIngresado = document.getElementById("select_modelo").value;
     veFiltrado = vehiculosArray.filter(vh => vh.modelo.includes(modeloIngresado));
-    
+
     let tabla = document.getElementById("tablaVehiculos");
 
     tabla.innerHTML = "";
@@ -102,13 +102,12 @@ function buscarVehiculoModelo(){
 
         let fila= document.createElement("tr");
 
-        fila.innerHTML = `<td>${veFiltrado.marca}</td>
-                          <td>${veFiltrado.modelo}</td>
-                          <td>US$ ${veFiltrado.precio}</td>
-                          <td>${veFiltrado.anio}</td>
+        fila.innerHTML = `<td>${vh.marca}</td>
+                          <td>${vh.modelo}</td>
+                          <td>US$ ${vh.precio}</td>
+                          <td>${vh.anio}</td>
                           `
         tabla.append(fila);
-
 }
 }
 //-------------------------------------------
@@ -139,8 +138,10 @@ function buscarVehiculoModelo(){
     vehiculosArray = JSON.parse( recuperando_vehiculos);
 
     let tabla = document.getElementById("tablaVehiculos");
-
+    let tablaC = document.getElementById("cotizado_body")
     tabla.innerHTML = "";
+    tablaC.innerHTML = "";
+
 
     for( let vehiculo of vehiculosArray){
 

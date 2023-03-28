@@ -118,15 +118,25 @@ function buscarVehiculoModelo(){
 
         
         
-        marca = document.getElementById("select_marca").value;
-        modelo = document.getElementById("select_modelo").value;
-        precio = document.getElementById("select_precio").value;
-        anio = document.getElementById("select_anio").value;
+    marca = document.getElementById("select_marca").value;
+    modelo = document.getElementById("select_modelo").value;
+    precio = document.getElementById("select_precio").value;
+    anio = document.getElementById("select_anio").value;
         
+    if(marca == null || marca.length == 0){
+                    
+            alert("ERROR al ingresar datos, porfavor verifique el formulario")
+            console.log(marca)
+    }else{
+
         vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
     
         let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
-        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);       
+        alert("Se ingresaron los datos.")
+            console.log(precio)
+}
+
         mostrarTabla()
 }    
 //-------------------------------------------

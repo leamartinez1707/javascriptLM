@@ -49,6 +49,29 @@
     resultadoFinal = Math.ceil(resultadoTotal * pagoCuotas)
     }
 //-------------------------------------------
+    //Funciones SweetAlert
+    function alertaConfirmado(){
+        Swal.fire({
+            position: 'top-end',
+            imageUrl: "https://cdn.icon-icons.com/icons2/3284/PNG/512/complete_done_checkmark_completed_icon_208202.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            title: 'Guardado correctamente!',
+            showConfirmButton: false,
+            timer: 1700
+})}
+
+    function alertaError(){
+        Swal.fire({
+            title: 'Error!',
+            text: 'Compruebe que los campos de datos esten completos y/o correctos.',
+            imageUrl: "https://cdn.icon-icons.com/icons2/3284/PNG/512/arrow_logout_exit_close_cancel_icon_208165.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: "#78c6f3"
+})}
+//-------------------------------------------
 
     //Funciones para filtrar y buscar en el array de vehiculos. También se muestra en la tabla el vehiculo buscado y cotizado.
     let veFiltrado = []
@@ -66,7 +89,11 @@
     function buscarVehiculo(){
 
     filtrarVehiculo();
-
+    
+    if(veFiltrado.length == 0){
+        console.log("no encontrado")
+        alertaError();
+        }else{
     let anioIngresado = document.getElementById("select_anio").value;
     veIngresado = veFiltrado.find(filtro => filtro.anio == anioIngresado);
     precio = veIngresado.precio;
@@ -83,10 +110,11 @@
                           `
     tabla.append(fila);
 }
+    }
 //-------------------------------------------
 
     //Buscar vehículos ingresados según modelo. (Sin funcionar aún)
-function buscarVehiculoModelo(){
+    function buscarVehiculoModelo(){
 
     let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
     vehiculosArray = JSON.parse(recuperando_vehiculos);
@@ -94,6 +122,10 @@ function buscarVehiculoModelo(){
     let modeloIngresado = document.getElementById("select_modelo").value;
     veFiltrado = vehiculosArray.filter(vh => vh.modelo.includes(modeloIngresado));
 
+    if(veFiltrado.length == 0 || modeloIngresado.value == null){
+    alertaError();
+    }else{
+    
     let tabla = document.getElementById("tablaVehiculos");
 
     tabla.innerHTML = "";
@@ -108,33 +140,27 @@ function buscarVehiculoModelo(){
                           <td>${vh.anio}</td>
                           `
         tabla.append(fila);
-}
-}
+}}}
 //-------------------------------------------
 
     //Ingresar un vehiculo al Array
 
     function agregarVehiculo(marca, modelo, precio, anio){
 
-        
-        
     marca = document.getElementById("select_marca").value;
     modelo = document.getElementById("select_modelo").value;
     precio = document.getElementById("select_precio").value;
     anio = document.getElementById("select_anio").value;
         
-    if(marca == null || marca.length == 0){
-                    
-            alert("ERROR al ingresar datos, porfavor verifique el formulario")
-            console.log(marca)
-    }else{
+    if(marca.length == 0 || modelo.length == 0 || precio.length == 0 || anio.length == 0){
 
+    alertaError();
+    }else{
         vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
     
         let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
         localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);       
-        alert("Se ingresaron los datos.")
-            console.log(precio)
+        alertaConfirmado();
 }
 
         mostrarTabla()
@@ -143,7 +169,6 @@ function buscarVehiculoModelo(){
 
     //Mostrar los datos del array en una tabla HTML
     function mostrarTabla(){
-
     let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
     vehiculosArray = JSON.parse( recuperando_vehiculos);
 
@@ -174,14 +199,17 @@ function buscarVehiculoModelo(){
     let vehiculosArray = [
         {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
         {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
-        {marca: 'Volkswagen', modelo: 'Saveiro', precio: 50000, anio: 2011},
-        {marca: 'Volkswagen', modelo: 'Nivus', precio: 25000, anio: 2019},
         {marca: 'Chevrolet', modelo: 'Aveo', precio: 55000, anio: 2022},
-        {marca: 'Chevrolet', modelo: 'Camaro', precio: 82000, anio: 2008},
-        {marca: 'Chevrolet', modelo: 'Cruze', precio: 53000, anio: 2023},
-        {marca: 'Chevrolet', modelo: 'Onix', precio: 44000, anio: 2013},
+        {marca: 'Chevrolet', modelo: 'Camaro', precio: 82000, anio: 2016},
         {marca: 'Suzuki', modelo: 'Alto', precio: 19000, anio: 2018},
         {marca: 'Suzuki', modelo: 'Celerio', precio: 15000, anio: 2016}];
+
+    function guardarArrayPrincipal(){
+
+        let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
+        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+    }
+    guardarArrayPrincipal();
 //-------------------------------------------
 
     //Objeto Vehiculo constructor
@@ -214,9 +242,11 @@ function buscarVehiculoModelo(){
         }
     }
 
+    
+
     filtrarVehiculo()
     buscarVehiculo()
-
+    
     if(tipoSeguro == 1 && tipoPago == 1){
 
     

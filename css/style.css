@@ -48,13 +48,13 @@ header h1{
 
 .formulario{
   display: flex;
-  background-color: rgb(120, 198, 243);
+  background-color: #78c6f3;
   text-align: center;
   justify-content: center;
 }
 .form_base{
   background-color: rgb(255, 255, 255);
-  width: 60%;
+  width: 80%;
   border-style: solid;
   border-color: black;
   border-width: 6px;

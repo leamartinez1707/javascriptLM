@@ -71,6 +71,17 @@
             confirmButtonText: 'Continuar',
             confirmButtonColor: "#78c6f3"
 })}
+
+    function alertaNoEncontrado(){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El modelo del vehiculo no se ha encontrado.',
+            imageUrl: "https://cdn.icon-icons.com/icons2/3284/PNG/512/arrow_logout_exit_close_cancel_icon_208165.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: "#78c6f3"
+})}
 //-------------------------------------------
 
     //Funciones para filtrar y buscar en el array de vehiculos. También se muestra en la tabla el vehiculo buscado y cotizado.
@@ -91,7 +102,7 @@
     filtrarVehiculo();
     
     if(veFiltrado.length == 0){
-        console.log("no encontrado")
+        
         alertaError();
         }else{
     let anioIngresado = document.getElementById("select_anio").value;
@@ -122,10 +133,12 @@
     let modeloIngresado = document.getElementById("select_modelo").value;
     veFiltrado = vehiculosArray.filter(vh => vh.modelo.includes(modeloIngresado));
 
-    if(veFiltrado.length == 0 || modeloIngresado.value == null){
-    alertaError();
-    }else{
+
+    if(modeloIngresado.length == 0 || veFiltrado.length < 1){
     
+    alertaNoEncontrado()
+    }else{
+
     let tabla = document.getElementById("tablaVehiculos");
 
     tabla.innerHTML = "";
@@ -242,14 +255,11 @@
         }
     }
 
-    
-
     filtrarVehiculo()
     buscarVehiculo()
     
     if(tipoSeguro == 1 && tipoPago == 1){
 
-    
     calcularSeguroBasico(precio, seguroBasico)
         
     seguroBasicoContado(resultadoBasico, pagoContado)

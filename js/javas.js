@@ -17,13 +17,13 @@
     function calcularSeguroBasico(precio, seguroBasico){
 
     resultadoBasico = precio * seguroBasico
-    }
+ }
 
     let resultadoTotal = 0;
     function calcularSeguroTotal(precio, seguroTotal){
 
     resultadoTotal = precio * seguroTotal
-    }
+ }
 //-------------------------------------------
     //Funciones para calcular el resultado final en base al metodo de pago y seguro elegido.
     let resultadoFinal = 0;
@@ -31,48 +31,69 @@
     function seguroBasicoContado(resultadoBasico, pagoContado){
     calcularSeguroBasico()
     resultadoFinal = Math.ceil(resultadoBasico * pagoContado)
-    }
+}
     function seguroBasicoCuotas(resultadoBasico, pagoCuotas){
 
     calcularSeguroBasico()    
     resultadoFinal = Math.ceil(resultadoBasico * pagoCuotas)
-    }
+}
     //Seguro total
     function seguroTotalContado(resultadoTotal, pagoContado){
 
     calcularSeguroTotal()
     resultadoFinal = Math.ceil(resultadoTotal * pagoContado)
-    }
+}
     function seguroTotalCuotas(resultadoTotal, pagoCuotas){
 
     calcularSeguroTotal()
     resultadoFinal = Math.ceil(resultadoTotal * pagoCuotas)
-    }
+}
 //-------------------------------------------
     //Funciones SweetAlert
     function alertaConfirmado(){
         Swal.fire({
             position: 'top-end',
-            imageUrl: "https://cdn.icon-icons.com/icons2/3284/PNG/512/complete_done_checkmark_completed_icon_208202.png",
-            imageWidth: 150,
-            imageHeight: 150,
+            imageUrl: "images/confirm.png",
+            imageWidth: 100,
+            imageHeight: 100,
             title: 'Guardado correctamente!',
             showConfirmButton: false,
-            timer: 1700
+            timer: 1700,
+            width: "300px"
 })}
 
     function alertaError(){
         Swal.fire({
             title: 'Error!',
             text: 'Compruebe que los campos de datos esten completos y/o correctos.',
-            imageUrl: "https://cdn.icon-icons.com/icons2/3284/PNG/512/arrow_logout_exit_close_cancel_icon_208165.png",
+            imageUrl: "images/error.png",
             imageWidth: 150,
             imageHeight: 150,
             confirmButtonText: 'Continuar',
             confirmButtonColor: "#78c6f3"
 })}
-//-------------------------------------------
 
+    function alertaNoEncontrado(){
+        Swal.fire({
+            title: 'Error!',
+            text: 'El modelo del vehiculo no se ha encontrado.',
+            imageUrl: "images/noEncontrado.png",
+            imageWidth: 150,
+            imageHeight: 150,
+            confirmButtonText: 'Continuar',
+            confirmButtonColor: "#78c6f3",
+            width: "300px"            
+})}
+//-------------------------------------------
+    //Obtengo los objetos de vehiculos.json
+//     function obtenerDatosVh (){
+
+//         fetch("/obj/vehiculos.json")
+//         .then( response=> response.json())
+//         .then( vehiculosArray=> {
+                 
+// })}
+    //-------------------------------------------
     //Funciones para filtrar y buscar en el array de vehiculos. También se muestra en la tabla el vehiculo buscado y cotizado.
     let veFiltrado = []
     let veIngresado = []
@@ -91,7 +112,7 @@
     filtrarVehiculo();
     
     if(veFiltrado.length == 0){
-        console.log("no encontrado")
+        
         alertaError();
         }else{
     let anioIngresado = document.getElementById("select_anio").value;
@@ -110,7 +131,7 @@
                           `
     tabla.append(fila);
 }
-    }
+}
 //-------------------------------------------
 
     //Buscar vehículos ingresados según modelo. (Sin funcionar aún)
@@ -122,10 +143,12 @@
     let modeloIngresado = document.getElementById("select_modelo").value;
     veFiltrado = vehiculosArray.filter(vh => vh.modelo.includes(modeloIngresado));
 
-    if(veFiltrado.length == 0 || modeloIngresado.value == null){
-    alertaError();
-    }else{
+
+    if(modeloIngresado.length == 0 || veFiltrado.length < 1){
     
+    alertaNoEncontrado()
+    }else{
+
     let tabla = document.getElementById("tablaVehiculos");
 
     tabla.innerHTML = "";
@@ -156,28 +179,58 @@
 
     alertaError();
     }else{
+
         vehiculosArray.push(new Vehiculo(marca, modelo, precio, anio));
     
         let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
-        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);       
+        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+    
         alertaConfirmado();
+
+        // fetch("/obj/vehiculos.json", {
+        
+        // method: 'POST',
+        // body: JSON.stringify({
+        //     marca: marca,
+        //     modelo: modelo,
+        //     precio: precio,
+        //     anio: anio,}),
+        //     headers: {
+        //         'Content-type': 'application/json;charset=UTF-8',},})
+            
+        // .then( response=> response.json())
+        // .then( vehiculosArray=> { 
+    // })
 }
-
-        mostrarTabla()
-}    
+}   
 //-------------------------------------------
-
+    
     //Mostrar los datos del array en una tabla HTML
     function mostrarTabla(){
+    
+    // obtenerDatosVh();
+    
+    // fetch("/obj/vehiculos.json")
+    //     .then( response=> response.json())
+    //     .then( vehiculosArray=> {
+    
     let recuperando_vehiculos = localStorage.getItem("vehiculosArray");
+    
+    if(recuperando_vehiculos == null){
+
+    let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
+    localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
+
+    }else{
+
     vehiculosArray = JSON.parse( recuperando_vehiculos);
+}
 
     let tabla = document.getElementById("tablaVehiculos");
     let tablaC = document.getElementById("cotizado_body")
     tabla.innerHTML = "";
     tablaC.innerHTML = "";
-
-
+    
     for( let vehiculo of vehiculosArray){
 
         let fila= document.createElement("tr");
@@ -188,15 +241,14 @@
                           <td>${vehiculo.anio}</td>
                           `
         tabla.append(fila);
-
-}
-}
+}}
 //-------------------------------------------
 
     //Inicio aplicación
     //Array de los vehiculos ingresados
-
+    
     let vehiculosArray = [
+
         {marca: 'Volkswagen', modelo: 'Gol', precio: 30000, anio: 2015 },
         {marca: 'Volkswagen', modelo: 'Vento', precio: 40000, anio: 2013 },
         {marca: 'Chevrolet', modelo: 'Aveo', precio: 55000, anio: 2022},
@@ -204,12 +256,6 @@
         {marca: 'Suzuki', modelo: 'Alto', precio: 19000, anio: 2018},
         {marca: 'Suzuki', modelo: 'Celerio', precio: 15000, anio: 2016}];
 
-    function guardarArrayPrincipal(){
-
-        let vehiculosArray_JSON = JSON.stringify(vehiculosArray);
-        localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
-    }
-    guardarArrayPrincipal();
 //-------------------------------------------
 
     //Objeto Vehiculo constructor
@@ -225,7 +271,7 @@
 }
 //-------------------------------------------
 
-    //Con esta funcion, se cotiza el vehículo que se ingresó por último en las casillas de datos.
+    //Se cotiza el vehículo ingresado en la casilla de datos.
 
     function calcularCostoFinal(){
 
@@ -242,14 +288,11 @@
         }
     }
 
-    
-
     filtrarVehiculo()
     buscarVehiculo()
     
     if(tipoSeguro == 1 && tipoPago == 1){
 
-    
     calcularSeguroBasico(precio, seguroBasico)
         
     seguroBasicoContado(resultadoBasico, pagoContado)
@@ -319,6 +362,7 @@
 }
 //-------------------------------------------
 
+    //Accion a ejecutar según el botón presionado
 
     let btn_agregar = document.getElementById("botonAgregar");
     btn_agregar.addEventListener("click" , agregarVehiculo);
@@ -332,7 +376,28 @@
     let buscarVh = document.getElementById("botonBuscar");
     buscarVh.addEventListener("click", buscarVehiculoModelo);
 //-------------------------------------------
-        
+
+    //Obtengo la posición del cliente
+    function obtenerPosicion(ubi){
+
+        temp = document.getElementById("temperatura")
+        let lat = ubi.coords.latitude;
+        let long = ubi.coords.longitude;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&appid=64e79f9de6fdee0937e9122e39584571&units=metric&lang=es`)
+        .then( response=> response.json())
+        .then( data=>{ 
+                        temp.innerHTML = 
+                                        `
+                                        <div><h2>Clima en ${data.name}</h2>
+                                        <h3>Temperatura de ${data.main.temp}°C </h3>
+                                        <h4>${data.weather[0].description.toUpperCase()}</h4></div>`
+
+})}
+
+    navigator.geolocation.getCurrentPosition(obtenerPosicion);
+//-------------------------------------------
+
 
 //-----------------------------------------------------------------------------------------------------------------------
 

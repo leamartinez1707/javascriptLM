@@ -9,13 +9,39 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
 }
-header{
+#header_uno{
   background-color: rgb(120, 198, 243);
+  position: relative;   
+  justify-content: space-between
 }
-header h1{
+#header_uno h1{
   font-family: Impact,'Arial Narrow Bold', sans-serif;
   margin: 0px;
   padding: 2px;
+}
+#header_uno h2{
+  font-size: 26px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#header_uno h3{
+  font-size: 22px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#header_uno h4{
+  font-size: 20px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#header_temp{
+  display: flex;
+  justify-content: center;
+  padding: 4px;
+}
+#temperatura{
+  color: white;
+  background-color: rgb(0, 0, 0);
+  width: 50%;
+  justify-content: center;
+  padding: 5px;
 }
 #select_marca{
   text-decoration: none;
@@ -45,7 +71,10 @@ header h1{
   border-color: black;
   width: 50%;
 }
-
+.contenedor{
+  display: block;
+  justify-content: center;
+}
 .formulario{
   display: flex;
   background-color: #78c6f3;
@@ -116,3 +145,4 @@ th, td {
 .background-table{
     background-color: rgb(149, 233, 248);
   }
+

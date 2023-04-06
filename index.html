@@ -16,8 +16,15 @@
 </head>
 <body>
     
-    <header>
-    <h1>VeSeguro | Cotizador de seguro</h1>
+    <header id="header_uno">
+    <div><h1>VeSeguro | Cotizador de seguro</h1></div>
+    <section id="header_temp">
+                                        <div id="temperatura">
+                                        <h2 id="ciudad"></h2>
+                                        <h3 id="temp"></h3>
+                                        <h4 id="clima"></h4>
+                                        </div>
+    </section>
     </header>
 
     <main class="contenedor">
@@ -38,19 +45,6 @@
     <div class="campo mb-3">
         <label class="form-label">Modelo *</label>
         <input class="form-text" value="" type="text" id="select_modelo" placeholder="Escriba el modelo del vehículo">
-        <!-- <select name="marca" id="selectMarca">
-            <option value="">-- Seleccione --</option>
-            <option value="Aveo">Aveo</option>
-            <option value="Alto">Alto</option>
-            <option value="Camaro">Camaro</option>
-            <option value="Celerio">Celerio</option>
-            <option value="Cruze">Cruze</option>
-            <option value="Gol">Gol</option>
-            <option value="Nivus">Nivus</option>
-            <option value="Onix">Onix</option>
-            <option value="Saveiro">Saveiro</option>
-            <option value="Vento">Vento</option>
-        </select> -->
     </div>
     <div class="campo mb-3">
         <label class="form-label">Precio *</label>
@@ -144,6 +138,8 @@
     </table>
   </section>
 </main>
-<script src="sweetalert2.all.min.js"></script>
+<footer>
+    
+</footer>
 </body>
 </html>

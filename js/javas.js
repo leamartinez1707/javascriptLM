@@ -380,7 +380,7 @@
     //Obtengo la posición del cliente
     function obtenerPosicion(ubi){
 
-        temp = document.getElementById("temperatura")
+        let temp = document.getElementById("temperatura")
         let lat = ubi.coords.latitude;
         let long = ubi.coords.longitude;
 
@@ -389,9 +389,10 @@
         .then( data=>{ 
                         temp.innerHTML = 
                                         `
-                                        <div><h2>Clima en ${data.name}</h2>
-                                        <h3>Temperatura de ${data.main.temp}°C </h3>
-                                        <h4>${data.weather[0].description.toUpperCase()}</h4></div>`
+                                        <div><h2>${data.name}</h2>
+                                        <h3>${data.main.temp}°C</h3>
+                                        <h4>${data.weather[0].description.toUpperCase()}</h4>
+                                        <h4>${(new Date()).toLocaleDateString()}</h4></div>`
 
 })}
 

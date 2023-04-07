@@ -50,6 +50,18 @@
 }
 //-------------------------------------------
     //Funciones SweetAlert
+    function alertaEncontrado(){
+        Swal.fire({
+            position: 'bottom',
+            imageUrl: "images/encontrado.png",
+            imageWidth: 100,
+            imageHeight: 100,
+            title: 'Vehículo cotizado!',
+            showConfirmButton: false,
+            timer: 1700,
+            width: "300px"
+})
+    }
     function alertaConfirmado(){
         Swal.fire({
             position: 'top-end',
@@ -85,15 +97,16 @@
             width: "300px"            
 })}
 //-------------------------------------------
-    //Obtengo los objetos de vehiculos.json
-//     function obtenerDatosVh (){
+    //Obtengo los objetos de vehiculos.json (No logré hacerlo funcional)
+    //function obtenerDatosVh (){
 
-//         fetch("/obj/vehiculos.json")
-//         .then( response=> response.json())
-//         .then( vehiculosArray=> {
+    //fetch("/obj/vehiculos.json")
+    //.then( response=> response.json())
+    //.then( vehiculosArray=> {
                  
-// })}
-    //-------------------------------------------
+    // })}
+//-------------------------------------------
+
     //Funciones para filtrar y buscar en el array de vehiculos. También se muestra en la tabla el vehiculo buscado y cotizado.
     let veFiltrado = []
     let veIngresado = []
@@ -110,13 +123,24 @@
     function buscarVehiculo(){
 
     filtrarVehiculo();
-    
-    if(veFiltrado.length == 0){
-        
+    let modeloIngresado = document.getElementById("select_modelo").value;
+
+    if(veFiltrado.length == 0 || modeloIngresado.length <= 2){
         alertaError();
         }else{
+            
     let anioIngresado = document.getElementById("select_anio").value;
+
+    if(anioIngresado == null){
+        console.log("anio es 0")
+        alertaError()
+    }else{
+    
     veIngresado = veFiltrado.find(filtro => filtro.anio == anioIngresado);
+    if(veIngresado == null){
+        alertaNoEncontrado()
+    }else{
+    console.log(veIngresado)
     precio = veIngresado.precio;
     
     let tabla = document.getElementById("tablaVehiculos");
@@ -130,6 +154,8 @@
                           <td>${veIngresado.anio}</td>
                           `
     tabla.append(fila);
+}
+}
 }
 }
 //-------------------------------------------
@@ -186,23 +212,23 @@
         localStorage.setItem("vehiculosArray" , vehiculosArray_JSON);
     
         alertaConfirmado();
-
-        // fetch("/obj/vehiculos.json", {
+}}   
+    // No funcionó, error de autorización
+    // fetch("/obj/vehiculos.json", {
         
-        // method: 'POST',
-        // body: JSON.stringify({
-        //     marca: marca,
-        //     modelo: modelo,
-        //     precio: precio,
-        //     anio: anio,}),
-        //     headers: {
-        //         'Content-type': 'application/json;charset=UTF-8',},})
+    // method: 'POST',
+    // body: JSON.stringify({
+    //     marca: marca,
+    //     modelo: modelo,
+    //     precio: precio,
+    //     anio: anio,}),
+    //     headers: {
+    //         'Content-type': 'application/json;charset=UTF-8',},})
             
-        // .then( response=> response.json())
-        // .then( vehiculosArray=> { 
+    // .then( response=> response.json())
+    // .then( vehiculosArray=> { 
     // })
-}
-}   
+
 //-------------------------------------------
     
     //Mostrar los datos del array en una tabla HTML
@@ -275,6 +301,7 @@
 
     function calcularCostoFinal(){
 
+    
     let tipoSeguro = document.getElementsByName("tipoPlan");
     for (let radio of tipoSeguro){
         if(radio.checked){
@@ -297,6 +324,7 @@
         
     seguroBasicoContado(resultadoBasico, pagoContado)
 
+    alertaEncontrado()
     let tablaC = document.getElementById("cotizado_body");
     tablaC.innerHTML = "";
 
@@ -391,7 +419,7 @@
                                         `
                                         <div><h2>${data.name}</h2>
                                         <h3>${data.main.temp}°C</h3>
-                                        <h4>${data.weather[0].description.toUpperCase()}</h4>
+                                        <h4>${data.weather[0].description}</h4>
                                         <h4>${(new Date()).toLocaleDateString()}</h4></div>`
 
 })}

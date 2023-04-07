@@ -342,6 +342,8 @@
     
     seguroBasicoCuotas(resultadoBasico, pagoCuotas)
 
+    alertaEncontrado()
+
     let tablaC = document.getElementById("cotizado_body");
     tablaC.innerHTML = "";
 
@@ -359,6 +361,8 @@
         
     seguroTotalContado(resultadoTotal, pagoContado)
 
+    alertaEncontrado()
+
     let tablaC = document.getElementById("cotizado_body");
     tablaC.innerHTML = "";
 
@@ -375,6 +379,8 @@
     calcularSeguroTotal(precio, seguroTotal)
 
     seguroTotalCuotas(resultadoTotal, pagoCuotas)
+
+    alertaEncontrado()
 
     let tablaC = document.getElementById("cotizado_body");
     tablaC.innerHTML = "";

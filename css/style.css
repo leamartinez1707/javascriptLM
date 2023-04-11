@@ -10,7 +10,7 @@ body{
     text-align: center;
 }
 #header_uno{
-  background-image: url("/images/fondo-seguros-serenus-f.jpg");
+  background-image: url("../images/fondo-seguros-serenus-f.jpg");
   position: relative;   
   justify-content: space-between;
   background-position: 100%;
@@ -42,7 +42,7 @@ body{
 }
 #temperatura{
   color: rgb(255, 255, 255);
-  background-image: url("/images/fondoTemp.jpg");
+  background-image: url("../images/fondoTemp.jpg");
   width: 250px;
   justify-content: center;
   padding: 5px;
